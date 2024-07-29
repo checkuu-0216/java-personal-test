@@ -25,12 +25,32 @@ public class Calculator {
         return result;
     }
 
-
-    public int div(int num1, int num2){
+    public int div(int num1, int num2) throws Exception {
         if (num2 == 0) {
-            throw new ArithmeticException("나눗셈 연산에서 분모에 0이 입력될 수 없습니다.");
+            throw new Exception();
         } else
             result = num1 / num2;
         return result;
     }
+
+    public void calculate(char operator, int num1, int num2) throws Exception {
+        switch (operator){
+            case '+' :
+                add(num1,num2);
+                break;
+            case '-' :
+                sub(num1,num2);
+                break;
+            case '*' :
+                mul(num1,num2);
+                break;
+            case '/' :
+                div(num1,num2);
+                break;
+            default:
+                System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
+        }
+    }
+
+
 }

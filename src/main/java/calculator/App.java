@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         Queue<Integer> intQueue = new LinkedList<>(); //앞선 결과를 삭제하고 새로운 연산결과를 저장하기위한 컬랙션
         int count = 0; //카운트 세기위한 index
@@ -22,32 +22,15 @@ public class App {
             System.out.print("사칙연산 기호를 입력하세요: ");
             char operator = sc.next().charAt(0); //사칙연산 기호를 넣기 위한 메소드
             // charAt 매개변수로 char 타입으로 변환 하고자하는 문자열의 위치를 받는다
-
-            switch (operator) {
-                case '+':
-                    calculator.add(num1,num2);
-                    break;
-                case '-':
-                    calculator.sub(num1,num2);
-                    break;
-                case '*':
-                    calculator.mul(num1,num2);
-                    break;
-                case '/':
-
-                    try {
-                        calculator.div(num1,num2);
-                    } catch (ArithmeticException e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                default:
-                    System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
-                    //사칙연산의 switch인데 다른문자가 들어 갔을 경우를 위해 작성
+            try{calculator.calculate(operator, num1, num2);}
+            catch (ArithmeticException e){
+                e.getMessage();
             }
+
             System.out.println("결과: " + calculator.result);
             count++;
             System.out.println(count + "번 계산하였습니다."); //while이 돌아간 수를 세기 위함
+
             intQueue.add(calculator.result);
             System.out.println(intQueue);
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
@@ -68,7 +51,9 @@ public class App {
             if (text3.equals("exit")) {
                 break; // 강의 2주차 숙제를 통해 특정 문자를 사용했을때 종료되는 법 배움
             }
+
         }
     }
+
 }
 
