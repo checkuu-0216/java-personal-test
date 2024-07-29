@@ -12,10 +12,9 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Queue<Integer> intQueue = new LinkedList<>(); //앞선 결과를 삭제하고 새로운 연산결과를 저장하기위한 컬랙션
         int count = 0; //카운트 세기위한 index
-Calculator calculator = new Calculator() ;
+        Calculator calculator = new Calculator();
 
         while (true) { //결과값을 배열에 넣기위해 while에서 for문으로 바꿈
-
             System.out.print("첫 번째 숫자를 입력하세요: ");
             int num1 = sc.nextInt(); //입력된 숫자를 저장하기 위한 nextInt
             System.out.print("두 번째 숫자를 입력하세요: ");
@@ -24,34 +23,32 @@ Calculator calculator = new Calculator() ;
             char operator = sc.next().charAt(0); //사칙연산 기호를 넣기 위한 메소드
             // charAt 매개변수로 char 타입으로 변환 하고자하는 문자열의 위치를 받는다
 
-            int result = 0;
             switch (operator) {
                 case '+':
-                    result = num1 + num2;
+                    calculator.add(num1,num2);
                     break;
                 case '-':
-                    result = num1 - num2;
+                    calculator.sub(num1,num2);
                     break;
                 case '*':
-                    result = num1 * num2;
+                    calculator.mul(num1,num2);
                     break;
                 case '/':
-                    // 나눗셈 연산에서 분모가 0일 경우를 위한 if 문
-                    if (num2 ==0) {
-                        Exception exception = new Exception();
-                    } else {
-                        result = num1 / num2;
+
+                    try {
+                        calculator.div(num1,num2);
+                    } catch (ArithmeticException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
                 default:
                     System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
                     //사칙연산의 switch인데 다른문자가 들어 갔을 경우를 위해 작성
             }
-            System.out.println("결과: " + result);
-
-
+            System.out.println("결과: " + calculator.result);
             count++;
             System.out.println(count + "번 계산하였습니다."); //while이 돌아간 수를 세기 위함
+            intQueue.add(calculator.result);
             System.out.println(intQueue);
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             String text = sc.next();//첫항 삭제를 위한 텍스트 입력 구간
@@ -61,7 +58,7 @@ Calculator calculator = new Calculator() ;
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             String text2 = sc.next();
-            if(text2.equals("inquiry")) {
+            if (text2.equals("inquiry")) {
                 for (Integer total : intQueue) {
                     System.out.println(total);
                 }
