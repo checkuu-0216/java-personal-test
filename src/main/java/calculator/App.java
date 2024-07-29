@@ -23,7 +23,7 @@ public class App {
             char operator = sc.next().charAt(0); //사칙연산 기호를 넣기 위한 메소드
             // charAt 매개변수로 char 타입으로 변환 하고자하는 문자열의 위치를 받는다
             try{calculator.calculate(operator, num1, num2);}
-            catch (ArithmeticException e){
+            catch (Exception e){
                 e.getMessage();
             }
 
