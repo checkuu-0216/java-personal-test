@@ -5,10 +5,12 @@ import java.util.LinkedList;
 
 public class ArithmeticCalculator extends Calculator {
     static Queue<Integer> intQueue = new LinkedList<Integer>();
+    //각각 클래스를 만들어 식을 옮겼고 여기에 새로 생성했다
     private AddOperator addOperator = new AddOperator();
     private SubtractOperator subtractOperator = new SubtractOperator();
     private MultiplyOperator multiplyOperator = new MultiplyOperator();
     private DivideOperator divideOperator = new DivideOperator();
+    private ModOperator modOperator = new ModOperator();
 
     public ArithmeticCalculator() {
         super();
@@ -31,8 +33,10 @@ public class ArithmeticCalculator extends Calculator {
                 } else
                result = divideOperator.div(num1, num2);
                 break;
+            case '%':
+                result = modOperator.mod(num1,num2); //나눈 나머지 계산식 추가
             default:
-                System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
+                System.out.println(" + , - , * , / , % 외에 다른 기호가 들어갈 수 없습니다.");
         }
         setResult(result);
         intQueue.add(result);
