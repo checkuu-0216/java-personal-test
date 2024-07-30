@@ -4,61 +4,38 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 public class ArithmeticCalculator extends Calculator {
-    static Queue<Double> intQueue = new LinkedList<Double>();
-    private double result;
+    static Queue<Integer> intQueue = new LinkedList<Integer>();
+    private AddOperator addOperator = new AddOperator();
+    private SubtractOperator subtractOperator = new SubtractOperator();
+    private MultiplyOperator multiplyOperator = new MultiplyOperator();
+    private DivideOperator divideOperator = new DivideOperator();
 
     public ArithmeticCalculator() {
         super();
     }
-
-    public double add(int num1, int num2) {
-        result = num1 + num2;
-        setResult((int) result);
-        intQueue.add(result);
-        return result;
-    }
-
-    public double sub(int num1, int num2) {
-        result = num1 - num2;
-        setResult((int) result);
-        intQueue.add(result);
-        return result;
-    }
-
-    public double mul(int num1, int num2) {
-        result = num1 * num2;
-        setResult((int) result);
-        intQueue.add(result);
-        return result;
-    }
-
-    public double div(int num1, int num2) throws Exception {
-        if (num2 == 0) {
-            throw new Exception();
-        } else
-        result = num1 / num2;
-        setResult((int) result);
-        intQueue.add(result);
-        return result;
-    }
-
     public void calculate(char operator, int num1, int num2) throws Exception {
+        int result =0;
         switch (operator) {
             case '+':
-                add(num1, num2);
+               result = addOperator.add(num1, num2);
                 break;
             case '-':
-                sub(num1, num2);
+                result = subtractOperator.sub(num1, num2);
                 break;
             case '*':
-                mul(num1, num2);
+               result = multiplyOperator.mul(num1, num2);
                 break;
             case '/':
-                div(num1, num2);
+                if(num2 ==0){
+                    throw new Exception();
+                } else
+               result = divideOperator.div(num1, num2);
                 break;
             default:
                 System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
         }
+        setResult(result);
+        intQueue.add(result);
         System.out.println("계산 기록 : " + intQueue); // 디버깅 출력
     }
 
@@ -67,7 +44,7 @@ public class ArithmeticCalculator extends Calculator {
     }
 
     public static void inquiryResult() {
-        for (Double result : intQueue) {
+        for (Integer result : intQueue) {
             System.out.println(result); //inquiry 진행을 위한 메서드
         }
     }
