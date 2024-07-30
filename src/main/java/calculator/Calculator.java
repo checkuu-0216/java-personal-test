@@ -1,16 +1,25 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
     private static Queue<Integer> intQueue; //Calculator에 remove를 넣기위한 Queue 생성
-
+    private static Queue<Double> circleQueue;
     private int num1;
     private int num2;
+    private double num3;
+    private final double pie = 3.1415; //final로 한 이는 pie의 값은 변하지 않는 값이고 해당 값이 변경되는것을 막기위해 final을 썻다.
+    private double circleResult;
     private int result; //결과 값 캡슐화
+
+    public double getCircleResult() {
+        return circleResult;
+    }
+
+    public void setCircleResult() {
+        this.circleResult = circleResult;
+    }
 
     public int getResult() {
         return result; //캡슐화된 result를 불러오는 메서드
@@ -22,6 +31,7 @@ public class Calculator {
 
     public Calculator() {
         intQueue = new LinkedList<>(); //Calculator에 intQueue 생성해주고 Main App에 result를 intQueue에 넣어주는 식 삭제
+        circleQueue = new LinkedList<>(); //원넓이 구하는 인스턴스 생성
     }
 
     public int add(int num1, int num2) {
@@ -73,10 +83,26 @@ public class Calculator {
         intQueue.remove(); //Queue를 이용해 만든 배열의 첫항을 삭제하기 위한 메서드
     }
 
+    public static void removeCircleResult() {
+        circleQueue.remove(); //Queue를 이용해 만든 배열의 첫항을 삭제하기 위한 메서드
+    }
+
     public static void inquiryResult() {
         for (Integer result : intQueue) {
             System.out.println(result); //inquiry 진행을 위한 메서드
         }
+    }
+
+    public static void inquiryCircleResult() {
+        for (Double circleResult : circleQueue) {
+            System.out.println(circleResult); //inquiry 진행을 위한 메서드
+        }
+    }
+
+    public void calculateCircleArea(double num3) {
+        double circleResult = num3 * num3 * pie; //원넓이 구하는 메서드
+        circleQueue.add(circleResult);
+        System.out.println("계산된 원 넓이: " + circleResult);
     }
 }
 
