@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -62,10 +64,18 @@ public class Calculator {
             default:
                 System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
         }// 연산 작업을 calculator에서 하기위한 메서드
+        intQueue.add(result); // 계산 결과를 큐에 추가
+        System.out.println("계산 기록 : " + intQueue); // 디버깅 출력
     }
 
-    public static void removeResult(Queue<Integer> intQueue) {
+    public static void removeResult() {
         intQueue.remove(); //Queue를 이용해 만든 배열의 첫항을 삭제하기 위한 메서드
     }
 
+    public static void inquiryResult() {
+        for (Integer result : intQueue) {
+            System.out.println(result);
+        }
+    }
 }
+

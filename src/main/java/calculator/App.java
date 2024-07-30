@@ -33,20 +33,18 @@ public class App {
             System.out.println(count + "번 계산하였습니다."); //while이 돌아간 수를 세기 위함
 
             intQueue.add(calculator.getResult());
-            System.out.println(intQueue);
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             String text = sc.next();//첫항 삭제를 위한 텍스트 입력 구간
             if (text.equals("remove")) {
-                Calculator.removeResult(intQueue);
+                Calculator.removeResult();
             }
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             String text2 = sc.next();
             if (text2.equals("inquiry")) {
-                for (Integer total : intQueue) {
-                    System.out.println(total);
-                }
+                Calculator.inquiryResult();
             }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String text3 = sc.next(); //계산종료 확인을 위한 텍스트 입력 구간
             if (text3.equals("exit")) {
