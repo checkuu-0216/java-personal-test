@@ -3,9 +3,16 @@ package calculator;
 public class Calculator {
     //operator = char
     //num1 , num2 = int
-    int num1;
-    int num2;
-    int result;
+    private int num1;
+    private int num2;
+    private int result; //결과 값 캡슐화
+
+    public int getResult () {
+        return result; //캡슐화된 result를 불러오는 메서드
+    }
+    public void setResult (int result) {
+        this.result = result; //간접 수정을 위한 setter
+    }
 
     public Calculator() {
     }
@@ -49,7 +56,7 @@ public class Calculator {
                 break;
             default:
                 System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
-        }
+        }// 연산 작업을 calculator에서 하기위한 메서드
     }
 
 
