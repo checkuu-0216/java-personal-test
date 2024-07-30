@@ -6,9 +6,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Calculator {
-    private static Queue<Integer> intQueue = new LinkedList<>(); //Calculator에 remove를 넣기위한 Queue 생성
-    //operator = char
-    //num1 , num2 = int
+    private static Queue<Integer> intQueue; //Calculator에 remove를 넣기위한 Queue 생성
+
     private int num1;
     private int num2;
     private int result; //결과 값 캡슐화
@@ -22,6 +21,7 @@ public class Calculator {
     }
 
     public Calculator() {
+        intQueue = new LinkedList<>(); //Calculator에 intQueue 생성해주고 Main App에 result를 intQueue에 넣어주는 식 삭제
     }
 
     public int add(int num1, int num2) {
@@ -65,6 +65,7 @@ public class Calculator {
                 System.out.println("사칙 연산외에 다른 기호가 들어갈 수 없습니다.");
         }// 연산 작업을 calculator에서 하기위한 메서드
         intQueue.add(result); // 계산 결과를 큐에 추가
+        // main에서 추가를 했는데 inquiry가 작동을 안해서 Calculator class에 넣었더니 오류해결됨.
         System.out.println("계산 기록 : " + intQueue); // 디버깅 출력
     }
 
@@ -74,7 +75,7 @@ public class Calculator {
 
     public static void inquiryResult() {
         for (Integer result : intQueue) {
-            System.out.println(result);
+            System.out.println(result); //inquiry 진행을 위한 메서드
         }
     }
 }
